@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Minimalistic Black & White Design System */
+    /* Enhanced Minimalistic Black & White Design System */
     --background: 0 0% 100%;
     --foreground: 0 0% 0%;
 
@@ -21,7 +21,7 @@ All colors MUST be HSL.
     --primary: 0 0% 0%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%;
+    --secondary: 0 0% 97%;
     --secondary-foreground: 0 0% 0%;
 
     --muted: 0 0% 96%;
@@ -34,16 +34,26 @@ All colors MUST be HSL.
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 90%;
-    --input: 0 0% 90%;
+    --input: 0 0% 93%;
     --ring: 0 0% 0%;
     
-    /* Custom design tokens */
+    /* Enhanced design tokens */
     --gradient-subtle: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
-    --gradient-dark: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 0% 15%));
-    --shadow-elegant: 0 4px 20px -2px hsl(0 0% 0% / 0.1);
+    --gradient-dark: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 0% 8%));
+    --gradient-header: linear-gradient(180deg, hsl(0 0% 0%), hsl(0 0% 12%));
+    --gradient-footer: linear-gradient(0deg, hsl(0 0% 0%), hsl(0 0% 5%));
+    --shadow-elegant: 0 8px 32px -8px hsl(0 0% 0% / 0.12);
     --shadow-subtle: 0 2px 8px -1px hsl(0 0% 0% / 0.05);
+    --shadow-hover: 0 12px 40px -8px hsl(0 0% 0% / 0.15);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
     --radius-xl: 1rem;
+    
+    /* Typography tokens */
+    --font-size-hero: clamp(2.5rem, 5vw, 4rem);
+    --font-size-title: clamp(1.875rem, 3vw, 2.5rem);
+    --line-height-tight: 1.1;
+    --letter-spacing-tight: -0.025em;
 
     --radius: 0.5rem;
 
@@ -119,28 +129,124 @@ All colors MUST be HSL.
 }
 
 @layer components {
+  /* Hero and Header Components */
   .hero-gradient {
-    background: var(--gradient-subtle);
+    background: var(--gradient-header);
   }
   
+  .hero-content {
+    padding: 5rem 0 6rem;
+  }
+  
+  /* Enhanced Card Components */
   .card-elevated {
-    box-shadow: var(--shadow-elegant);
+    box-shadow: var(--shadow-subtle);
     transition: var(--transition-smooth);
+    border: 1px solid hsl(0 0% 0% / 0.08);
   }
   
   .card-elevated:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px -4px hsl(0 0% 0% / 0.15);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: hsl(0 0% 0% / 0.15);
   }
   
+  .feature-card {
+    transition: var(--transition-smooth);
+    border: 1px solid var(--border);
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-elegant);
+  }
+  
+  /* Typography Components */
+  .hero-title {
+    font-size: var(--font-size-hero);
+    font-weight: 800;
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  
+  .section-title {
+    font-size: var(--font-size-title);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  
+  /* Table Components */
+  .data-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  
+  .table-row {
+    transition: var(--transition-fast);
+    border-bottom: 1px solid hsl(0 0% 0% / 0.05);
+  }
+  
+  .table-row:nth-child(even) {
+    background-color: hsl(0 0% 98%);
+  }
+  
+  .table-row:hover {
+    background-color: hsl(0 0% 95%);
+    transform: scale(1.005);
+  }
+  
+  /* Input Components */
+  .input-focus {
+    position: relative;
+  }
+  
+  .input-focus::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+  }
+  
+  .input-focus:focus-within::after {
+    width: 100%;
+  }
+  
+  /* Glass and Backdrop Effects */
   .glass-effect {
     background: hsl(0 0% 100% / 0.95);
     backdrop-filter: blur(10px);
-    border: 1px solid hsl(0 0% 0% / 0.1);
+    border: 1px solid hsl(0 0% 0% / 0.08);
   }
   
-  .data-grid {
-    background: var(--gradient-subtle);
-    border-radius: var(--radius-xl);
+  .backdrop-blur {
+    backdrop-filter: blur(20px);
+  }
+  
+  /* Layout Components */
+  .section-padding {
+    padding: 6rem 0;
+  }
+  
+  .section-padding-sm {
+    padding: 4rem 0;
+  }
+  
+  .container-wide {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  /* Footer Component */
+  .footer-gradient {
+    background: var(--gradient-footer);
   }
 }
